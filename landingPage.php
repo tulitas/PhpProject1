@@ -104,6 +104,8 @@
             </div>
         </div>
     </div>
+<a href="index.php">home</a>
+
 <!--</div>-->
 </body>
 </html>

@@ -260,5 +260,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         </div>
     </div>
 </div>
+<a href="index.php">home</a>
+
 </body>
 </html>
