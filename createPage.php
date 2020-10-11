@@ -1,7 +1,8 @@
 <?php
 // Include config file
 require_once "config.php";
-
+//next line catch sql errors and view it on screen
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 // Define variables and initialize with empty values
 $county = $country = $town = $description = $displayableaddress = $image = $thumbnail = $latitude = $longitude =
     $numberOfBedrooms = $numberOfBathrooms = $price = $propertyType = $saleRent = "";
@@ -33,18 +34,83 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $town = $input_town;
     }
-
+    $input_description = trim($_POST["description"]);
+    if (empty($input_description)) {
+        $town_err = "Please enter the description.";
+    } else {
+        $description = $input_description;
+    }
+    $input_displayableaddress = trim($_POST["displayableaddress"]);
+    if (empty($input_displayableaddress)) {
+        $town_err = "Please enter the displayableaddress.";
+    } else {
+        $displayableaddress = $input_displayableaddress;
+    }
+    $input_image = trim($_POST["image"]);
+    if (empty($input_image)) {
+        $town_err = "Please enter the image.";
+    } else {
+        $image = $input_image;
+    }
+    $input_thumbnail = trim($_POST["thumbnail"]);
+    if (empty($input_thumbnail)) {
+        $town_err = "Please enter the thumbnail.";
+    } else {
+        $thumbnail = $input_thumbnail;
+    }
+    $input_latitude = trim($_POST["latitude"]);
+    if (empty($input_latitude)) {
+        $town_err = "Please enter the latitude.";
+    } else {
+        $latitude = $input_latitude;
+    }
+    $input_longitude = trim($_POST["longitude"]);
+    if (empty($input_longitude)) {
+        $town_err = "Please enter the longitude.";
+    } else {
+        $longitude = $input_longitude;
+    }
+    $input_numberOfBedrooms = trim($_POST["numberOfBedrooms"]);
+    if (empty($input_numberOfBedrooms)) {
+        $town_err = "Please enter the numberOfBedrooms.";
+    } else {
+        $numberOfBedrooms = $input_numberOfBedrooms;
+    }
+    $input_numberOfBathrooms = trim($_POST["numberOfBathrooms"]);
+    if (empty($input_numberOfBathrooms)) {
+        $town_err = "Please enter the numberOfBathrooms.";
+    } else {
+        $numberOfBathrooms = $input_numberOfBathrooms;
+    }
+    $input_price = trim($_POST["price"]);
+    if (empty($input_price)) {
+        $town_err = "Please enter the price.";
+    } else {
+        $price = $input_price;
+    }
+    $input_propertyType = trim($_POST["propertyType"]);
+    if (empty($input_propertyType)) {
+        $town_err = "Please enter the propertyType.";
+    } else {
+        $propertyType = $input_propertyType;
+    }
+    $input_saleRent = trim($_POST["saleRent"]);
+    if (empty($input_saleRent)) {
+        $town_err = "Please enter the saleRent.";
+    } else {
+        $saleRent = $input_saleRent;
+    }
     // Check input errors before inserting in database
-    if (empty($county_err) && empty($country_err) && empty($town_err)) {
+//    if (empty($county_err) && empty($country_err) && empty($town_err)) {
         // Prepare an insert statement
-        $sql = "INSERT INTO rent (count, country, town, description, 
+        $sql = "INSERT INTO rent (county, country, town, description, 
                                     displayableaddress, image, thumbnail,latitude, 
                                     longitude, numberOfBedrooms, numberOfBathrooms, price,
-                                    propertyType, saleRent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                                    propertyType, saleRent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sss",$param_county,
+            mysqli_stmt_bind_param($stmt, "ssssssssssssss",$param_county,
                 $param_country, $param_town, $param_description, $param_displayableaddress,
             $param_image, $param_thumbnail, $param_latitude, $param_longitude, $param_numberOfBedrooms,
                 $param_numberOfBathrooms, $param_price, $param_propertyType, $param_saleRent);
@@ -76,7 +142,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Close statement
         mysqli_stmt_close($stmt);
-    }
+//    }
 
     // Close connection
     mysqli_close($link);
