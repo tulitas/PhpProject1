@@ -11,9 +11,10 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-    echo "Hello, world! This is my first PHP project!";
-        ?>
-    <a href="landingPage.php">landing page</a>
+    echo "This is my first PHP project!";
+        ?><br>
+    <a href="landingPage.php">landing page</a><br>
     <a href="createPage.php">Create page</a>
+
     </body>
 </html>
