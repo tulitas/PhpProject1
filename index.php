@@ -15,6 +15,7 @@ and open the template in the editor.
         ?><br>
     <a href="landingPage.php">landing page</a><br>
     <a href="createPage.php">Create page</a>
+    <a href="searchPage.php">Search page</a>
 
     </body>
 </html>
